@@ -2,14 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Frontend Build') {
             steps {
-                echo 'Building..'
+                dir(frontend)
+                sh 'npm install -g @angular/cli'
+                sh 'ng build'
             }
         }
-        stage('Test') {
+        stage('Frontend Test') {
             steps {
-                echo 'Testing..'
+                dir(frontend)
+                sh 'ng test'
             }
         }
         stage('Deploy') {
